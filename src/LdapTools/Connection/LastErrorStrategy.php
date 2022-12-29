@@ -93,8 +93,13 @@ class LastErrorStrategy
      */
     public function getDiagnosticMessage()
     {
-        @ldap_get_option($this->connection, constant($this->diagnosticOpt), $message);
-        
+        $message = null;
+        $LdapExtConnectionClass = "LDAP\Connection";
+
+        if (class_exists('LDAP\Connection') && $this->connection instanceof $LdapExtConnectionClass) {
+            @ldap_get_option($this->connection, constant($this->diagnosticOpt), $message);
+        }
+
         return $message;
     }
 }

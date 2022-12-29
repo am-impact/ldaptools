@@ -10,6 +10,8 @@
 
 namespace LdapTools\Security;
 
+use LdapTools\Security\Ace\AceFlags;
+
 /**
  * Used in flags that can be translated to SDDL.
  *
@@ -29,7 +31,7 @@ trait FlagsSddlTrait
         $names = [];
 
         $used = [];
-        foreach (static::SHORT_NAME as $name => $value) {
+        foreach (AceFlags::SHORT_NAME as $name => $value) {
             if ($this->has($value) && !in_array($value, $used)) {
                 $names[] = $name;
                 $used[] = $value;

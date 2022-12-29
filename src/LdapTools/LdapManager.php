@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file is part of the LdapTools package.
  *
@@ -75,7 +76,7 @@ class LdapManager
 
     /**
      * @param Configuration $config
-     * @param Connection\LdapConnectionInterface[] $connections
+     * @param Connection\LdapConnectionInterface $connections
      */
     public function __construct(Configuration $config, LdapConnectionInterface ...$connections)
     {
@@ -138,7 +139,7 @@ class LdapManager
     /**
      * Explicitly add connections using already constructed connection objects.
      *
-     * @param Connection\LdapConnectionInterface[] $connections
+     * @param Connection\LdapConnectionInterface $connections
      * @return $this
      */
     public function addConnection(LdapConnectionInterface ...$connections)
@@ -300,7 +301,7 @@ class LdapManager
 
         return $this;
     }
-    
+
     /**
      * A shorthand method for verifying a username/password combination against LDAP. Optionally you can pass a variable
      * to store the error message or error number returned from LDAP for more detailed information on authentication
@@ -337,7 +338,9 @@ class LdapManager
     {
         if (!$this->schemaFactory) {
             $this->schemaFactory = new LdapObjectSchemaFactory(
-                $this->getCache(), $this->getSchemaParser(), $this->config->getEventDispatcher()
+                $this->getCache(),
+                $this->getSchemaParser(),
+                $this->config->getEventDispatcher()
             );
         }
 
