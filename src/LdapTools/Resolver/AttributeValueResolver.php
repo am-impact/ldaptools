@@ -85,13 +85,13 @@ class AttributeValueResolver extends BaseValueResolver
             // No converter, but the value should still be encoded.
             if (!$this->schema->hasConverter($attribute) && !isset($this->converted[$attribute])) {
                 $attributes[$attribute] = $this->encodeValues($values);
-            // Only continue if it has a converter and has not already been converted.
+                // Only continue if it has a converter and has not already been converted.
             } elseif ($this->schema->hasConverter($attribute) && !in_array($attribute, $this->converted)) {
                 $values = $this->getConvertedValues($values, $attribute, $direction);
                 if (in_array($attribute, $this->aggregated)) {
                     $attribute = $this->schema->getAttributeToLdap($attribute);
                 }
-                $attributes[$attribute] = (count($values) == 1) ? reset($values) : $values;
+                $attributes[$attribute] = ((is_array($values) || (function_exists('is_countable') && is_countable($values))) && count($values) == 1) ? reset($values) : $values;
             }
         }
 
